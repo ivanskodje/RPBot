@@ -22,10 +22,10 @@ Open the project in the IDE of your choice. It is assumed you know how to import
 
 ## Available Commands
 
-| Command       | Example of use      | Description                                                                                        |
-|---------------|--------------------------------------------------------------------------------------------------------------------------|
-| roll          | /roll 1d6           | Generates dices equal to the first number, and rolls values between 1 and the second number.       |
-| calc          | /calc (1*2)/2       | Calculates mathematical expressions.                                                               |
+| Command       | Description                                                                                                   |
+|---------------|---------------------------------------------------------------------------------------------------------------|
+| roll          | Generates dices equal to the first number, and rolls values between 1 and the second number. (/roll 1d6)      |
+| calc          | Calculates mathematical expressions. (/calc (1*2)/2)                                                          |
 
 
 ## Additional Information (Discord4J and Command4J)
