@@ -18,7 +18,6 @@ import sx.blah.discord.util.DiscordException;
  */
 public class Main
 {
-
 	private static String token = ""; // Bot token
 
 	/**

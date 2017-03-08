@@ -103,6 +103,6 @@ public class Roll
 	*/
 	private static void invalidExpression(CommandContext context)
 	{
-		Client.sendMessage(context.getMessage().getChannel(), context.getMessage().getAuthor() + ": Dice expressions contain the standard representations of dice in text form (e.g. 2d6 is two 6-sided dice).\nTry typing in '/roll 2d6'.");
+		Client.sendMessage(context.getMessage().getChannel(), context.getMessage().getAuthor() + ": Dice expressions contain the standard representations of dice in text form (e.g. 2d6 is two 6-sided dice).\nTry typing in '!roll 2d6'.");
 	}
 }

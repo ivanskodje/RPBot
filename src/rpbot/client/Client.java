@@ -8,6 +8,8 @@ package rpbot.client;
 import com.darichey.discord.api.Command;
 import com.darichey.discord.api.CommandRegistry;
 import rpbot.command.Calc;
+import rpbot.command.Help;
+import rpbot.command.Name;
 import rpbot.command.Roll;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.handle.obj.IChannel;
@@ -28,11 +30,20 @@ public class Client
 	public static void init(IDiscordClient client)
 	{
 		// Command Registry Config
-		CommandRegistry.getForClient(client).setPrefix("/");
+		CommandRegistry.getForClient(client).setPrefix("!");
+		
+		// Command: help
+		Command help = new Command("help");
+		help.withAliases("h");
+		help.onExecuted((context) ->
+		{
+			Help.Execute(context);
+		});
+		CommandRegistry.getForClient(client).register(help);
 		
 		// Command: roll
 		Command roll = new Command("roll");
-		roll.withAliases("dice", "rolling", "d", "r");
+		roll.withAliases("dice", "rolling", "r");
 		roll.onExecuted((context) ->
 		{
 			Roll.Execute(context);
@@ -47,6 +58,14 @@ public class Client
 			Calc.Execute(context);
 		});
 		CommandRegistry.getForClient(client).register(calc);
+		
+		// Command: name
+		Command name = new Command("name");
+		name.onExecuted((context) ->
+		{
+			Name.Execute(context);
+		});
+		CommandRegistry.getForClient(client).register(name);
 	}
 	
 	

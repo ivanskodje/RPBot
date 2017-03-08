@@ -27,6 +27,13 @@ public class Calc
 			return;
 		}
 		
+		// If the argument is "help", display help text
+		if(context.getArgs()[0].equals("help"))
+		{
+			Client.sendMessage(context.getMessage().getChannel(), userName + ":\n!calc *<mathematical expression>*");
+			return;
+		}
+			
 		// Put together a string with remaining arguments (math)
 		String mathString = Stream.of(context.getArgs()).collect(Collectors.joining());
 		
