@@ -1,5 +1,6 @@
 package rpbot.command;
 
+import com.darichey.discord.api.Command;
 import com.darichey.discord.api.CommandContext;
 import java.util.Random;
 import rpbot.client.Client;
@@ -58,12 +59,12 @@ public class Roll
 			// Error handling : Make sure we dont try to roll an excessive amount of dice
 			if(diceCount > MAX_ROLLS)
 			{
-				Client.sendMessage(context.getMessage().getChannel(), userName + ": You cannot roll more than " + MAX_ROLLS + " dices at once!");
+				Client.sendMessage(context.getMessage().getChannel(), userName + ":\nYou cannot roll more than " + MAX_ROLLS + " dices at once!");
 				return;
 			}
 			else if(diceSides > MAX_DICE_SIDES)
 			{
-				Client.sendMessage(context.getMessage().getChannel(), userName + ": You cannot roll dice over " + MAX_DICE_SIDES + " sides!");
+				Client.sendMessage(context.getMessage().getChannel(), userName + ":\nYou cannot roll dice over " + MAX_DICE_SIDES + " sides!");
 				return;
 			}
 			
@@ -89,7 +90,7 @@ public class Roll
 			}
 			
 			// Send result
-			Client.sendMessage(context.getMessage().getChannel(), userName + ": (" + diceString + ") Total value: " + totalValue);
+			Client.sendMessage(context.getMessage().getChannel(), userName + ":\n(" + diceString + ") Total value: " + totalValue);
 		}
 		catch(NumberFormatException ex)
 		{
@@ -103,6 +104,23 @@ public class Roll
 	*/
 	private static void invalidExpression(CommandContext context)
 	{
-		Client.sendMessage(context.getMessage().getChannel(), context.getMessage().getAuthor() + ": Dice expressions contain the standard representations of dice in text form (e.g. 2d6 is two 6-sided dice).\nTry typing in '!roll 2d6'.");
+		Client.sendMessage(context.getMessage().getChannel(), context.getMessage().getAuthor() + ":\nDice expressions contain the standard representations of dice in text form (e.g. 2d6 is two 6-sided dice).\nTry typing in '!roll 2d6'.");
+	}
+	
+	
+	/* 
+	Used to register table as a command
+	*/
+	public static Command register()
+	{
+		// Command: roll
+		Command roll = new Command("roll");
+		roll.withAliases("dice", "rolling", "r");
+		roll.onExecuted((context) ->
+		{
+			Roll.Execute(context);
+		});
+		
+		return roll;
 	}
 }

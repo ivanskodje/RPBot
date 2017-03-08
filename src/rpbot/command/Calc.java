@@ -1,5 +1,6 @@
 package rpbot.command;
 
+import com.darichey.discord.api.Command;
 import com.darichey.discord.api.CommandContext;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -23,7 +24,7 @@ public class Calc
 		// If we have no arguments, send a warning message and return
 		if(context.getArgs().length < 1)
 		{
-			Client.sendMessage(context.getMessage().getChannel(), userName + ": Missing a mathematical expression\nTry /calc 1+1");
+			Client.sendMessage(context.getMessage().getChannel(), userName + ":\nMissing a mathematical expression\nTry /calc 1+1");
 			return;
 		}
 		
@@ -44,13 +45,30 @@ public class Calc
 			ScriptEngine engine = mgr.getEngineByName("JavaScript");
 			
 			// Send message
-			Client.sendMessage(context.getMessage().getChannel(), userName + ": " + mathString + " = " + engine.eval(mathString));
+			Client.sendMessage(context.getMessage().getChannel(), userName + ":\n" + mathString + " = " + engine.eval(mathString));
 			
 		}
 		catch(ScriptException ex)
 		{
-			Client.sendMessage(context.getMessage().getChannel(), userName + ": '" + mathString + "' is not a valid mathematical expression");
+			Client.sendMessage(context.getMessage().getChannel(), userName + ":\n'" + mathString + "' is not a valid mathematical expression");
 			ex.printStackTrace();
 		}
+	}
+	
+	
+	/* 
+	Used to register table as a command
+	*/
+	public static Command register()
+	{
+		// Command: calc
+		Command calc = new Command("calc");
+		calc.withAliases("c", "math", "kalk", "calculate");
+		calc.onExecuted((context) ->
+		{
+			Calc.Execute(context);
+		});
+		
+		return calc;
 	}
 }

@@ -5,6 +5,7 @@
  */
 package rpbot.command;
 
+import com.darichey.discord.api.Command;
 import com.darichey.discord.api.CommandContext;
 import rpbot.client.Client;
 import sx.blah.discord.handle.obj.IUser;
@@ -25,11 +26,28 @@ public class Help
 		IUser userName = context.getMessage().getAuthor();
 		
 		// Generate help text
+		// TODO: Automatically generate help text instead of hardcoding the string
 		String helpText = "__**Command List:**__\n"
-				+ "roll, calc, name";
+				+ "roll, calc, name, table";
 		
 		// Send a list of commands
-		Client.sendMessage(context.getMessage().getChannel(), userName + ":\n\n" + helpText);
+		Client.sendMessage(context.getMessage().getChannel(), userName + ":\n" + helpText);
+	}
+	
+	
+	/* 
+	Used to register table as a command
+	*/
+	public static Command register()
+	{
+		// Command: help
+		Command help = new Command("help");
+		help.withAliases("h");
+		help.onExecuted((context) ->
+		{
+			Help.Execute(context);
+		});
 		
+		return help;
 	}
 }

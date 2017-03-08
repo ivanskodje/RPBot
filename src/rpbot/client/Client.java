@@ -11,6 +11,7 @@ import rpbot.command.Calc;
 import rpbot.command.Help;
 import rpbot.command.Name;
 import rpbot.command.Roll;
+import rpbot.command.Table;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.util.DiscordException;
@@ -29,43 +30,13 @@ public class Client
 	 */
 	public static void init(IDiscordClient client)
 	{
-		// Command Registry Config
+		// Setup Prefix
 		CommandRegistry.getForClient(client).setPrefix("!");
-		
-		// Command: help
-		Command help = new Command("help");
-		help.withAliases("h");
-		help.onExecuted((context) ->
-		{
-			Help.Execute(context);
-		});
-		CommandRegistry.getForClient(client).register(help);
-		
-		// Command: roll
-		Command roll = new Command("roll");
-		roll.withAliases("dice", "rolling", "r");
-		roll.onExecuted((context) ->
-		{
-			Roll.Execute(context);
-		});
-		CommandRegistry.getForClient(client).register(roll);
-		
-		// Command: calc
-		Command calc = new Command("calc");
-		calc.withAliases("c", "math", "kalk", "calculate");
-		calc.onExecuted((context) ->
-		{
-			Calc.Execute(context);
-		});
-		CommandRegistry.getForClient(client).register(calc);
-		
-		// Command: name
-		Command name = new Command("name");
-		name.onExecuted((context) ->
-		{
-			Name.Execute(context);
-		});
-		CommandRegistry.getForClient(client).register(name);
+		CommandRegistry.getForClient(client).register(Help.register());
+		CommandRegistry.getForClient(client).register(Roll.register());
+		CommandRegistry.getForClient(client).register(Calc.register());
+		CommandRegistry.getForClient(client).register(Name.register());
+		CommandRegistry.getForClient(client).register(Table.register());
 	}
 	
 	

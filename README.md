@@ -14,19 +14,21 @@ Open the project in the IDE of your choice. It is assumed you know how to import
 5. Enter the URL into your browser, and select which channel you want the bot to connect. 
 6. Done. The bot should now appear as "Offline" in the selected Discord channel.
 
-### Bot Login (Method 1)
+### Bot Login
 1. Go to Discordapp.com and [copy the Token value of your bot](https://discordapp.com/developers/applications/me)
 2. Create a token.txt textfile and add it to the root of your project
 3. Open token.txt and store the token on the first line. NB: Never share your token file. If you do, other people can login as YOUR bot.
-4. Run Main.java and the bot should login. Test it by typing in '/roll 1d6'.
+4. Run Main.java and the bot should login. Test it by typing in '!roll 1d6'.
 
 ## Available Commands
 
 | Command       | Description                                                                                                   |
 |---------------|---------------------------------------------------------------------------------------------------------------|
-| roll          | Generates dices equal to the first number, and rolls values between 1 and the second number. (/roll 1d6)      |
-| calc          | Calculates mathematical expressions. (/calc (1*2)/2)                                                          |
-
+| help          | Displays available commands (!help)                                                                           |
+| roll          | Generates dices equal to the first number, and rolls values between 1 and the second number. (!roll 1d6)      |
+| calc          | Calculates mathematical expressions. (!calc (1*2)/2)                                                          |
+| name          | Generates a female or male name. (!name female)                                                               |
+| table         | Used to generate or display a row from a text file (!table short example 5)                                   |
 
 ## Additional Information (Discord4J and Command4J)
 Check out the documentation for [Discord4J](https://github.com/austinv11/Discord4J) and the [Discord4J Plugin: Command4J](https://github.com/Discord4J-Addons/Commands4J).

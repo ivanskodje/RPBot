@@ -5,6 +5,7 @@
  */
 package rpbot.command;
 
+import com.darichey.discord.api.Command;
 import com.darichey.discord.api.CommandContext;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -33,8 +34,7 @@ public class Name
 		{
 			// Generate a random name
 			Random random = new Random();
-			int rndInt = random.nextInt(2); // Adding +1 since we dont want 0 to be an option
-			System.out.println("<----- RND INT : " + rndInt);
+			int rndInt = random.nextInt(2);
 			if(rndInt == 1)
 			{
 				arg = "male";
@@ -137,6 +137,22 @@ public class Name
 		lastName = Character.toUpperCase(lastName.charAt(0)) + lastName.substring(1);
 		
 		// Send result
-		Client.sendMessage(context.getMessage().getChannel(), userName + ": " + firstName + " " + lastName);
+		Client.sendMessage(context.getMessage().getChannel(), userName + ":\n" + firstName + " " + lastName);
+	}
+	
+	
+	/* 
+	Used to register table as a command
+	*/
+	public static Command register()
+	{
+		// Command: name
+		Command name = new Command("name");
+		name.onExecuted((context) ->
+		{
+			Name.Execute(context);
+		});
+		
+		return name;
 	}
 }
