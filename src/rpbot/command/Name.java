@@ -68,7 +68,7 @@ public class Name
 		// Male name
 		if(arg.equals("male"))
 		{
-			String malePath = "src/rpbot/data/names/male.firstname.list";
+			String malePath = "data/names/male.firstname.list";
 			
 			// Generate firstname
 			try 
@@ -91,7 +91,7 @@ public class Name
 		// Female name
 		else if(arg.equals("female"))
 		{
-			String femalePath = "src/rpbot/data/names/female.firstname.list";
+			String femalePath = "data/names/female.firstname.list";
 			
 			// Generate firstname
 			try 
@@ -115,7 +115,7 @@ public class Name
 		try 
 		{
 			// Lastname path
-			String lastNamePath = "src/rpbot/data/names/all.surname.list";
+			String lastNamePath = "data/names/all.surname.list";
 
 			// Get number of lines
 			int lineNumbers = Integer.parseInt(Files.readAllLines(Paths.get(lastNamePath)).get(0));

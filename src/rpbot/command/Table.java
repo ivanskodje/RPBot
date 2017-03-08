@@ -9,6 +9,7 @@ import com.darichey.discord.api.Command;
 import com.darichey.discord.api.CommandContext;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -78,7 +79,7 @@ public class Table
 		}
 		catch(NumberFormatException ex)
 		{
-			// No defined number: no need to throw error as it is expected.
+			
 		}
 
 		String commandVars = "";	// The commands names
@@ -95,12 +96,23 @@ public class Table
 		commandVars = commandVars.substring(0, commandVars.length()-1);
 		fileName = fileName.substring(0, fileName.length()-1);
 		
+		ArrayList<String> commands = getCommandVariables();
+
+		Boolean getList = false;
+		// No defined number: no need to throw error as it is expected.
+		// Check if we want help
+		if(arguments.get(arguments.size()-1).equals("list"))
+		{
+			commandVars = commandVars.replace(" list", "");
+			fileName = fileName.replace(".list", "");
+			getList = true;
+		}
 		
 		// Do we have a valid book that matches the arguments?
-		if(getCommandVariables().contains(commandVars))
+		if(commands.contains(commandVars))
 		{
 			// Full data path to the table
-			String dataPath = "src/rpbot/data/table/" + fileName;
+			String dataPath = "data/tables/" + fileName;
 			
 			// Table data (which we will output)
 			String tableData = "";
@@ -111,10 +123,27 @@ public class Table
 			try
 			{
 				// Get number of table lines from first line
-				maxLines = Integer.parseInt(Files.readAllLines(Paths.get(dataPath)).get(0));
+				String[] lineZero = Files.readAllLines(Paths.get(dataPath)).get(0).split(" ");
+				
+				if(getList)
+				{
+					// If we *have* defined a second variable in the file (first line behind the number of lines)
+					if(lineZero.length > 1)
+					{
+						Client.sendMessage(context.getMessage().getChannel(), userName + ":\n**" + lineZero[1]);
+						return;
+					}
+					else
+					{
+						invalidExpression(context);
+						return;
+					}
+				}
+				
+				maxLines = Integer.parseInt(lineZero[0]);
 				
 				// If num is 0, it means no num was specified - select a random value
-				if(num <= 0)
+				if(num == 0)
 				{
 					Random rnd = new Random();
 					num = rnd.nextInt(maxLines) + 1;
@@ -127,6 +156,7 @@ public class Table
 				}
 				
 				tableData = Files.readAllLines(Paths.get(dataPath)).get(num);
+				tableData = tableData.replaceAll("<br>", System.getProperty("line.separator")); // If we want to add one liners with breakpoints, we can use <br>
 				Client.sendMessage(context.getMessage().getChannel(), userName + ":\n" + tableData);
 			} 
 			catch (IOException ex)
@@ -147,7 +177,7 @@ public class Table
 	public static ArrayList<String> getCommandVariables()
 	{
 		// Folder with the tables
-		File folder = new File("src/rpbot/data/table");
+		File folder = new File("data/tables");
 		
 		// Get a list of files
 		File[] listOfFiles = folder.listFiles();
@@ -159,7 +189,7 @@ public class Table
 		{
 			if (listOfFiles[i].isFile()) 
 			{
-				fileNames.add(listOfFiles[i].getName().replace(".", " "));
+				fileNames.add(listOfFiles[i].getName().replace(".", " ").toLowerCase());
 			} 
 			/*
 			else if (listOfFiles[i].isDirectory()) 
