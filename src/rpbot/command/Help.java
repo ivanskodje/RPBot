@@ -16,28 +16,30 @@ import sx.blah.discord.handle.obj.IUser;
  */
 public class Help
 {
+
 	/**
 	 * Executes the command
-	 * @param context 
+	 *
+	 * @param context
 	 */
 	public static void Execute(CommandContext context)
 	{
 		// Username (@<name>#id)
 		IUser userName = context.getMessage().getAuthor();
-		
+
 		// Generate help text
 		// TODO: Automatically generate help text instead of hardcoding the string
 		String helpText = "__**Command List:**__\n"
-				+ "roll, calc, name, table";
-		
+				+ "roll, calc, name, table, list\n\n"
+				+ "Run a command by adding " + "!" + " infront of a command.";
+
 		// Send a list of commands
 		Client.sendMessage(context.getMessage().getChannel(), userName + ":\n" + helpText);
 	}
-	
-	
+
 	/* 
 	Used to register table as a command
-	*/
+	 */
 	public static Command register()
 	{
 		// Command: help
@@ -47,7 +49,7 @@ public class Help
 		{
 			Help.Execute(context);
 		});
-		
+
 		return help;
 	}
 }

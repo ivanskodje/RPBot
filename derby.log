@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Tue Aug 22 22:40:27 CEST 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015e-0bac-cc28-0000059e8238 
+on database directory E:\Git\RPBot\MyRepository with class loader sun.misc.Launcher$AppClassLoader@6bc7c054 
+Loaded from file:/E:/Git/RPBot/lib/db-derby-10.13.1.1-lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_121-b13
+user.dir=E:\Git\RPBot
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
