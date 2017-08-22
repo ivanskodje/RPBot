@@ -29,6 +29,7 @@ Open the project in the IDE of your choice. It is assumed you know how to import
 | calc          | Calculates mathematical expressions. (!calc (1*2)/2)                                                          |
 | name          | Generates a female or male name. (!name female)                                                               |
 | table         | Used to generate or display a row from a text file (!table short example 5)                                   |
+| list          | Used to create your own lists and items. Can create lists inside lists. Be careful when removing data.        |
 
 ## Additional Information (Discord4J and Command4J)
 Check out the documentation for [Discord4J](https://github.com/austinv11/Discord4J) and the [Discord4J Plugin: Command4J](https://github.com/Discord4J-Addons/Commands4J).
